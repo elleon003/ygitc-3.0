@@ -15,9 +15,7 @@ INSTALLED_APPS += [
 ]
 
 # Add development-specific middleware
-MIDDLEWARE += [
-    'django_browser_reload.middleware.BrowserReloadMiddleware',
-]
+MIDDLEWARE.insert(0, 'django_browser_reload.middleware.BrowserReloadMiddleware')
 
 # Database - SQLite for development
 DATABASES = {
