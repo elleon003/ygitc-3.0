@@ -18,11 +18,15 @@ urlpatterns = [
     path('django-admin/', admin.site.urls),
     path('cms/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
-    path('', include(wagtail_urls)),  # Wagtail handles all root and subpages
-] 
+]
 
+# Add debug URLs before Wagtail's catch-all pattern
 if settings.DEBUG:
     urlpatterns += [
         path("__reload__/", include("django_browser_reload.urls")),
-        
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Add Wagtail's catch-all pattern last
+urlpatterns += [
+    path('', include(wagtail_urls)),  # Wagtail handles all root and subpages
+]
